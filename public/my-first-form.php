@@ -14,7 +14,7 @@
     </head>    
     <body>
         <h2> User Login </h2>
-        <form method="POST" action="">
+        <form method="GET" action="">
             <p>
                 <label for="username">Username</label>
                 <input id="username" name="username" type="text" placeholder = "Enter username here">
@@ -28,10 +28,10 @@
             <p>
                 <button type = "submit">Login</button> 
             </p>
-        </form>
+       
 
         <h2> Compose an email</h1>
-        <form method="POST" action="">
+        
              <p>
                 <label for="to">To:</label>
                 <input id="to" name="to" type="text" placeholder = "Enter the mail of the receiver">
@@ -61,10 +61,10 @@
             <p>
                 <button type = "send"> Send</button> 
             </p>  
-        </form>
+       
       
         <h2>Multiple Choice Test</h2>
-         <form method="POST" action="">
+         
                
                <p>What is your favorite social network?</p>
                   <label for="q1a">
@@ -109,6 +109,25 @@
                     <label for="os4"><input type="checkbox" id="os4" name="os[]" value="windows"> Austin</label>
                     <label for="os5"><input type="checkbox" id="os5" name="os[]" value="windows"> El Paso</label>
                     <label for="os3"><input type="checkbox" id="os3" name="os[]" value="windows"> Corpus Christi</label>
-        </form>
+               
+               <p> 
+                <label for="apple_products">What Apple products have you used? </label>
+                <select id="apple_products" name="apple_products[]" multiple>
+                    <option value="Macbook Pro">Mackbook Pro</option>
+                    <option value="Macbook Air">Macbook Air</option>
+                    <option value="iMac">iMac</option>
+                    <option value="Ipad">Ipad</option>
+                    <option value="Iphone">Iphone</option>
+                </select>
+               </p>
+
+        <h2> Select testing </h2>
+        
+              <label for="like_html">Do you like HTML: </label>
+                    <select id="like_html" name="like_html[]">
+                    <option value = "1">Yes</option>
+                    <option value = "0" selected>No</option>
+                    </select>
+        </form> 
     </body>
 </html>

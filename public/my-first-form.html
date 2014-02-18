@@ -4,6 +4,7 @@
          <title>My First HTML Form</title>
     </head>    
     <body>
+        <h1> User Login </h1>
         <form method="POST" action="http://requestb.in/1chxi961">
             <p>
                 <label for="username">Username</label>
@@ -18,6 +19,34 @@
             <p>
                 <button type = "submit">Login</button> 
             </p>
+        </form>
+
+        <h2> Compose an email</h1>
+        <form method="POST" action="http://requestb.in/1chxi961">
+             <p>
+                <label for="to">To:</label>
+                <input id="to" name="to" type="text" placeholder = "Enter the mail of the receiver">
+            </p>
+
+             <p>
+                <label for="from">From:</label>
+                <input id="from" name="from" type="text" placeholder = "Enter your email">
+            </p>
+
+             <p>
+                <label for="subject">Subject:</label>
+                <input id="subject" name"subject" type="text" placeholder = "Enter the subject">
+            </p>
+
+            <p>
+                <label for="bodyemail">Compose Email:</label>
+                <textarea id="bodyemail" name="bodyemail" type="text"  rows ="30" cols ="50" placeholder = "Type your message here"></textarea>
+            </p>
+
+            <p>
+                <button type = "send"> Send</button> 
+            </p>  
+
         </form>
     </body>
 </html>

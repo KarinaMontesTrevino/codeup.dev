@@ -1,0 +1,48 @@
+<html>
+
+<head>
+</head>
+
+<body>
+      
+      <script>
+     	 var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+		 var color = colors[Math.floor(Math.random()*colors.length)];
+
+         var favorite = 'red'; // todo, change this to your favorite color from the list
+
+	
+	     console.log ('The random color is ' + color);
+
+
+        // todo: Create a block of if/else statements to check for every color except indigo and violet.
+		// todo: When a color is encountered log a message that tells the color, and an object of that color.
+		// Example: Blue is the color of the sky.
+
+		var message;
+	     	if (color == "red"){
+                  console.log("Red is the color of an apple");
+             }else if (color == "orange"){
+              	  console.log("Orange like a tangerine");
+             }else if (color == "yellow"){
+                  console.log("Bananas are yellow");
+             }else if(color == "green"){
+                  console.log("I love the Green Latern");
+             }else if(color == "blue"){
+             	  console.log("Blue like the element most indispensable, water");
+             // todo: Have a final else that will catch indigo and violet.
+             // todo: In the else, log: I don't know anything by that color.
+             }else if(color=="indigo"){
+	     	      console.log("I don't know anything about that color");
+	         }else if(color=="violet"){
+	         	  console.log("I don't know anything about that color");
+	         }
+
+	         // todo: Using the ternary operator, conditionally log a statement that
+             //       says whether the random color matches your favorite color.
+             var message = (color == favorite) ? " This is my favorite color" : "I hate this color"; 
+             console.log(message);
+      </script>
+</body>	
+
+</html>

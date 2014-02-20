@@ -1,10 +1,19 @@
+<?php
+     
+     echo "<p>GET:</p>";
+     var_dump($_GET)
+
+     echo "<p>POST:</p>";
+     var_dump($_POST);
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
          <title>My First HTML Form</title>
     </head>    
     <body>
-        <h1> User Login </h1>
+        <h2> User Login </h2>
         <form method="POST" action="http://requestb.in/1chxi961">
             <p>
                 <label for="username">Username</label>
@@ -42,11 +51,63 @@
                 <label for="bodyemail">Compose Email:</label>
                 <textarea id="bodyemail" name="bodyemail" type="text"  rows ="30" cols ="50" placeholder = "Type your message here"></textarea>
             </p>
+            
+            <p>
+               <label for="email_copy">
+                     <input type="checkbox" id="email_copy" name="email_copy" value="yes" checked> Do you want to save a copy in your sent folder?
+               </label>      
+            </p>
 
             <p>
                 <button type = "send"> Send</button> 
             </p>  
+        </form>
+      
+        <h2>Multiple Choice Test</h2>
+         <form method="POST" action="http://requestb.in/1chxi961">
+               <p>What is your favorite social network?</p>
+                  <label for="q1a">
+                        <input type="radio" id="q1a" name="q1" value="facebook">
+                        Facebook
+                 </label>
+                <label for="q1b">
+                        <input type="radio" id="q1b" name="q1" value="twitter">
+                        Twitter
+                </label>
+                <label for="q1c">
+                        <input type="radio" id="q1c" name="q1" value="linkedin">
+                        Linkedin
+                </label>
+                <label for="q1d">
+                        <input type="radio" id="q1d" name="q1" value="pin Interest">
+                       Pin Interest
+                </label>
 
+                <p>Which color do you prefer?</p>
+                  <label for="q1a">
+                        <input type="radio" id="q1a" name="q1" value="red">
+                        Red
+                 </label>
+                <label for="q1b">
+                        <input type="radio" id="q1b" name="q1" value="black">
+                        Black
+                </label>
+                <label for="q1c">
+                        <input type="radio" id="q1c" name="q1" value="blue">
+                        Blue
+                </label>
+                <label for="q1d">
+                        <input type="radio" id="q1d" name="q1" value="white">
+                       White
+                </label>
+
+                <p>What cities of Texas do you know?</p>
+                    <label for="os1"><input type="checkbox" id="os1" name="os[]" value="linux"> SanAntonio</label>
+                    <label for="os2"><input type="checkbox" id="os2" name="os[]" value="osx"> Houston</label>
+                    <label for="os3"><input type="checkbox" id="os3" name="os[]" value="windows"> Dallas</label>
+                    <label for="os4"><input type="checkbox" id="os4" name="os[]" value="windows"> Austin</label>
+                    <label for="os5"><input type="checkbox" id="os5" name="os[]" value="windows"> El Paso</label>
+                    <label for="os3"><input type="checkbox" id="os3" name="os[]" value="windows"> Corpus Christi</label>
         </form>
     </body>
 </html>

@@ -1,0 +1,30 @@
+<html>
+      <head>
+      </head>
+
+      <body>
+            <script>
+
+                   var random = Math.floor((Math.random()*50)+1);
+
+
+                    if  (random % 2 !== 0){
+
+                         console.log('Random odd number to skip is: ' + random);
+
+                         for (var number = 1; number <= 50; number++) {
+                               
+                               if (number != random){
+                          
+                                    console.log(number);
+                               }else{
+                               	    console.log("Yipes! Skipping number: " + number);
+                               }
+  
+                         }  
+
+                    }
+                     
+            </script>
+      </body>
+</html>

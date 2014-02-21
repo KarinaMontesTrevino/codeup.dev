@@ -7,16 +7,16 @@
                    // Random funcion that returns a random number between 1-50
                    var random = Math.floor((Math.random()*50)+1);
 
-                    // Checks if the random number is an odd number if not it keeps generating a random number
+                    // Checks if the random number is an odd number if not, it keeps generating a random number
                     if  (random % 2 !== 0){
 
                          console.log('Random odd number to skip is: ' + random);
 
                          for (var number = 1; number <= 50; number++) {
                                
-                               if (number % 2 != 1){
+                               if (number % 2 != 0){
 
-                                     continue;
+                                     break;
 
                                }else if (number != random){
 

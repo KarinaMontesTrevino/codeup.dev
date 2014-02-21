@@ -15,8 +15,9 @@
                          for (var number = 1; number <= 50; number++) {
                                
                                if (number != random){
-                          
-                                    console.log(number);
+                                   if (number % 2 != 0){
+                                      console.log("Here is an odd number: " + number);
+                                   }   
                                }else{
                                	    console.log("Yipes! Skipping number: " + number);
                                }

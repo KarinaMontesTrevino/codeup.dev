@@ -15,10 +15,29 @@
 
 					// todo:
 					// Create log statements that will print each of the names array elements individually.
-                        console.log(names[0]);
-                        console.log(names[1]);
-                        console.log(names[2]);
-                        console.log(names[3]);
+                        //console.log(names[0]);
+                        //console.log(names[1]);
+                        //console.log(names[2]);
+                        //console.log(names[3]);
+
+                        console.log("------Using a for loop------");
+
+                        // Modify the code that logs out the names array elements individually to instead use a for loop.
+                        for (var index = 0; index < names.length; index++) {
+                               console.log('The name at index ' + index + ' is: ' + names[index]);
+                         }
+
+                        console.log("------Using a forEach-------");
+
+                        // Use a forEach loop to print the names again.
+                        names.forEach(function (element, index, array) {
+
+    						// element is the shape name
+    						// index is the iterator
+					        // array is the shapes array itself
+
+                       console.log('The name at index ' + index + ' is: ' + element);
+                       });
 
             </script>
       </body>

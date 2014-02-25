@@ -70,7 +70,7 @@
     <form method="POST">
       
             <input id="new_item" name="new_item" type="text" placeholder = "Enter the item you want to add">
-            <button type="add">Add!</button>
+            <button type="add">Add Item</button>
       
     </form>
 

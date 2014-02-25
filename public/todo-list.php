@@ -32,26 +32,34 @@ function save_file ($filename, $items){
   fwrite($handle, $itemsString);
   fclose($handle);
 }
-
+$error_msg = '';
 if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) {
-    // Set the destination directory for uploads
-    $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
-    // Grab the filename from the uploaded file by using basename
-    $newfilename = basename($_FILES['upload_file']['name']);
-    // Create the saved filename using the file's original name and our upload directory
-    $saved_filename = $upload_dir . $newfilename;
-    // Move the file from the temp location to our uploads directory
-    move_uploaded_file($_FILES['upload_file']['tmp_name'], $saved_filename); 
-    //here
-    // checks the file size to be greater than 0 
-      if (filesize($saved_filename)>0 ){
-          // Load $ array with file contents
-          $contents_from_file = open_file($saved_filename);   
+
+     if($_FILES['upload_file']['type'] != 'text/plain'){
+         
+         $error_msg = 1;
+
      }else{
-          $contents_from_file = array();
+        // Set the destination directory for uploads
+        $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+        // Grab the filename from the uploaded file by using basename
+        $newfilename = basename($_FILES['upload_file']['name']);
+        // Create the saved filename using the file's original name and our upload directory
+        $saved_filename = $upload_dir . $newfilename;
+        // Move the file from the temp location to our uploads directory
+        move_uploaded_file($_FILES['upload_file']['tmp_name'], $saved_filename); 
+        //here
+
+        // checks the file size to be greater than 0 
+          if (filesize($saved_filename)>0 ){
+              // Load $ array with file contents
+              $contents_from_file = open_file($saved_filename);   
+         }else{
+              $contents_from_file = array();
+        }
+        $items = array_merge($items, $contents_from_file);
+        save_file($filename, $items);
     }
-    $items = array_merge($items, $contents_from_file);
-    save_file($filename, $items);
 }
 
 // check if the new item exists (new post) and is not empty
@@ -81,11 +89,11 @@ if(isset($_GET['remove'])){   // check if the new item exists
 <h2> To Do List: </h2>
     <body>
         <ul>
-        <?php
+        <?
             //add items from todo.txt to $items array
-            foreach ($items as $key => $item) {    // iterates through an array of items and prints every element in the array
-              echo "<li>$item<a href = \"?remove=$key\"> Remove</a></li>";  //| <a href= '/lecture.php?remove={$key}' name= 'remove' id = 'remove'>
-        }?>                                                                 
+            foreach ($items as $key => $item) :    // iterates through an array of items and prints every element in the array ?>
+              <?= "<li>{$item}<a href = '?remove={$key}'> Remove</a></li>";  //| <a href= '/lecture.php?remove={$key}' name= 'remove' id = 'remove'>
+            endforeach;?>                                                                 
         </ul>
 
       <form method="POST" action = "">
@@ -105,12 +113,14 @@ if(isset($_GET['remove'])){   // check if the new item exists
                   <input type="submit" value="Upload">
               </p>
 
-              <?php // Check if we saved a file
-                   if (isset($saved_filename)) {
+              <? // Check if we saved a file
+                   if (isset($saved_filename)) :
                        // If we did, show a link to the uploaded file
                       echo "<p>You can download your file <a href='/uploads/{$newfilename}'>here</a>.</p>";
-                    }
-               ?>
+                   endif; ?>
+                   <?if  ($error_msg == 1) :
+                      echo "<p>You can't upload that file, we can only process .txt files</p>";
+                  endif; ?>
              
       </form>
    </body>

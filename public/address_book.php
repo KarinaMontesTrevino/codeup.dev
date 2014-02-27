@@ -1,8 +1,14 @@
 <?php
 
 $filename = 'address_book.csv';
-$error_msg ='';
-
+$error_msg =[];
+$name_error = '';
+$address_error ='';
+$city_error = '';
+$state_error = '';
+$zip_error = '';
+$phone_error ='';
+$string_message = '';
 // function that reads a file 
 function readCSV($filename){
 	// creates an empty array
@@ -33,44 +39,44 @@ function writeCSV($filename, $records){
 
 }
 
- $address_book = [ ['The White House', '1600 Pennsylvania Avenue NW', 'Washington', 'DC', '20500'],
-                   ['Marvel Comics', 'P.O. Box 1527', 'Long Island City', 'NY', '11101'],
-                   ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']];
-
-var_dump($address_book);
-
 $address_book = readCSV($filename); 
+var_dump($address_book);
 
 // checks if a field of the form is empty if true it shows an error msg indicating which fields need to be filed
 if (!empty($_POST)){
 
-		$name = $_POST['name'];
-		$address = $_POST['address'];
-		$city = $_POST['city'];
-		$state = $_POST['state'];
-		$zip_code = $_POST['zip_code'];
-		$phone_number = $_POST['phone_number'];
+    $name = $_POST['name'];
+    $address = $_POST['address'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $zip_code = $_POST['zip_code'];
+    $phone_number = $_POST['phone_number'];
         
 
-		if (empty($name)) {
-			$error_msg = 'The field name is empty, please fill that out';
-		}elseif (empty($address)) {
-            $error_msg = 'The field address is empty, please fill that out';
-		}elseif (empty($city)) {
-			$error_msg = 'The field city is empty, please fill that out';
-		}elseif (empty($state)) {
-		    $error_msg = 'The field state is empty, please fill that out';
-		}elseif (empty($zip_code)) {
-			$error_msg = 'The field zip code is empty, please fill that out';
-		}elseif (empty($phone_number)) {
-			$error_msg = ' The field phone number is empty, please fill that out';
-            
-		}else{
-			  $entry = [$name, $address, $city, $state, $zip_code, $phone_number];
-        array_push($address_book, $entry);
-        writeCSV('address_book.csv', $address_book);
-		}
-		 
+    if (empty($name)) {
+      $name_error = 'The field name is empty, please fill that out.';
+    }
+    if (empty($address)) {
+      $address_error = 'The field address is empty, please fill that out.';
+    }
+    if(empty($city)) {
+      $city_error = 'The field city is empty, please fill that out.';
+    }
+    if (empty($state)) {
+      $state_error = 'The field state is empty, please fill that out.';
+    }
+    if (empty($zip_code)) {
+      $zip_error= 'The field zip code is empty, please fill that out.';
+    }else{    
+      $entry = [$name, $address, $city, $state, $zip_code, $phone_number];
+      array_push($address_book, $entry);
+      writeCSV('address_book.csv', $address_book);
+    }
+    
+     
+    $error_msg = [$name_error, $address_error, $city_error, $state_error, $zip_error, $phone_error];
+    $string_message =implode("\n", $error_msg);
+    var_dump($string_message);
 }
 
 
@@ -123,7 +129,7 @@ if (!empty($_POST)){
          	<input type="submit">
          </p>
               <h3>[Errors]</h3>
-                <?= $error_msg; ?>
+              <p><?= $string_message; ?></p>
       </form>
 </body>
 </html>

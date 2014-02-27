@@ -1,43 +1,40 @@
 
 <?php   
-// for debugging purposes
-var_dump($_POST);  // this shows the contents of the method POST
-var_dump($_GET);   // this shows the contents of the method GET
+// Usedfor debugging purposes
+var_dump($_POST);  // This shows the contents of the method POST
+var_dump($_GET);   // This shows the contents of the method GET
 var_dump($_FILES);
 
 $filename = 'todo.txt';  // name of the file 
 
-//check if the file size is greater than 0 if true it opens the file an puts the contents into items, if its false it creates
+// Check if the file size is greater than 0 if true it opens the file an puts the contents into items array otherwise it creates
 //  an empty array
 
 $items = (filesize($filename) > 0) ? $items = open_file($filename) : array();
 
 
-// function that opens a file, reads its content and returns an array of the contents called items
+// Function that opens a file, reads its content and returns an array of the contents called items
 function open_file($filename){      
-  //load todo.txt
+  // Load files
   $handle = fopen ($filename, 'r');
   $contents = fread($handle, filesize($filename));
   fclose($handle);
-
- $array_contents = explode(PHP_EOL, $contents);
- 
- $items = $array_contents;
-     
- return $items;   
+  $array_contents = explode(PHP_EOL, $contents);
+  $items = $array_contents;
+  return $items;   
 }
 
 
-// function that writes in a file a list of items 
+// Function that writes in a file a list of items 
 function save_file ($filename, $items){
   $itemsString = implode (PHP_EOL, $items);
   $handle = fopen ($filename, 'w');
-  // save to file 
+  // Save to file 
   fwrite($handle, $itemsString);
   fclose($handle);
 }
 
-// variable that will be tested when a file is not a text file
+// Variable that will be used to echo a msg when a file is not a text file
 $error_msg = '';
 if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) {
 
@@ -58,16 +55,15 @@ if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) {
         // Load $ array with file contents
         $contents_from_file = open_file($saved_filename);   
         
-        // checks if our checkbox is checked and overrides the content of our file
+        // Checks if our checkbox is checked if true overrides the content of our file otherwise it adds the content of a file
+        //  to our original file
         if (isset($_POST['checkboxfile'])){
-
-          $items = $contents_from_file;
-          save_file($filename, $items);
+            $items = $contents_from_file;
+            save_file($filename, $items);
 
         }else{
-         
-          $items = array_merge($items, $contents_from_file);
-          save_file($filename, $items);
+            $items = array_merge($items, $contents_from_file);
+            save_file($filename, $items);
         }
 
     }
@@ -97,16 +93,18 @@ if(isset($_GET['remove'])){   // check if the new item exists
 <head>
     <title>Todo List</title>
 </head>
-<h2> To Do List: </h2>
     <body>
-        <ul>
-        <?
-            //add items from todo.txt to $items array
-            foreach ($items as $key => $item) :    // iterates through an array of items and prints every element in the array ?>
-              <li><?= htmlspecialchars(strip_tags($item)); ?> <a href ='?remove=<?=$key; ?>'>Remove</a></li>  
-            <?endforeach;?>                                                                 
-        </ul>
-
+      <h2> To Do List: </h2>
+        <? if (count($items) > 0) : ?>    
+              <ul>
+                   <?//add items from todo.txt to $items array
+                   foreach ($items as $key => $item) :    // iterates through an array of items and prints every element in the array ?>
+                       <li><?= htmlspecialchars(strip_tags($item)); ?> <a href ='?remove=<?=$key; ?>'>Remove</a></li>  
+                   <?endforeach;?>                                                                 
+              </ul>
+      <?else : ?>
+              <?= "You don't have any item"; ?>
+      <? endif; ?>        
       <form method="POST" action = "">
                <p>
                 <label for ="new_item">Item to add:</label>
@@ -115,9 +113,9 @@ if(isset($_GET['remove'])){   // check if the new item exists
               </p>
       </form>
 
-      <?if  ($error_msg == true) :
-            echo "<p>You can't upload that file, we can only process .txt files</p>";
-       endif; ?>
+           <?if  ($error_msg == true) :
+                 echo "<p>You can't upload that file, we can only process .txt files</p>";
+            endif; ?>
       
       <h2>Upload File</h2>
       <form method="POST" enctype = "multipart/form-data" action = "todo-list.php">
@@ -128,13 +126,11 @@ if(isset($_GET['remove'])){   // check if the new item exists
                  <br><input type="submit" value="Upload">
                  <input type="checkbox" name="checkboxfile" value="override" checked> Do you want to override your file? 
               </p>
-
                    <? // Check if we saved a file
                    if (isset($saved_filename)) :
                        // If we did, show a link to the uploaded file
                       echo "<p>You can download your file <a href='/uploads/{$newfilename}'>here</a>.</p>";
                    endif; ?>
-             
       </form>
    </body>
 </html>

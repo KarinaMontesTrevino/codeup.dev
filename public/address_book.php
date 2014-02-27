@@ -1,6 +1,41 @@
 <?php
+// Used for debbuging purposes
+var_dump($_POST);
 
-$filename = 'address_book.csv';
+// encapsulating into this class
+class AddressDataStore {  
+   public $filename ='';
+  function read_address_book(){
+      // creates an empty array
+      $contents = [];
+     // opens the file in mode read only
+      $handle = fopen($this->filename, 'r');
+     // while is not finished from reading the file
+     while (($data = fgetcsv($handle)) !== FALSE){
+       // put the contents of the file in an array
+       $contents[] = $data;
+      }
+  // close
+  fclose($handle);
+  // return the array contents
+  return $contents;
+  }
+
+  function write_address_book($addresses){
+      // code to write $addresses_array to file $this->filename
+     $handle = fopen($this->filename, 'w');
+     foreach ($addresses as  $address) {
+            fputcsv($handle, $address);
+      }
+            fclose($handle);
+    }
+}
+
+// Creates a new instance of AddressDataStore
+$book = new AddressDataStore ();
+$book->filename = 'address_book.csv';
+$addresses = $book->read_address_book();
+
 $error_msg =[];
 $name_error = '';
 $address_error ='';
@@ -9,40 +44,7 @@ $state_error = '';
 $zip_error = '';
 $phone_error ='';
 $string_message = '';
-// function that reads a file 
-function readCSV($filename){
-	// creates an empty array
-	$contents = [];
-	// opens the file in mode read only
-	$handle = fopen($filename, 'r');
-	// while is not finished from reading the file
-	while (($data = fgetcsv($handle)) !== FALSE){
-		   // put the contents of the file in an array
-		   $contents[] = $data;
-	}
-	// close
-	fclose($handle);
-	// return the array contents
-	return $contents;
-}
-
-// Used for debbuging purposes
-var_dump($_POST);
-
-// function that saves a file
-function writeCSV($filename, $records){
-	$handle = fopen($filename, 'w');
-	 foreach ($records as  $record) {
-  	      fputcsv($handle, $record);
-    }
-	fclose($handle);
-
-}
-
-$address_book = readCSV($filename); 
-var_dump($address_book);
-
-// checks if a field of the form is empty if true it shows an error msg indicating which fields need to be filed
+// checks if post is not empty
 if (!empty($_POST)){
 
     $name = $_POST['name'];
@@ -67,18 +69,20 @@ if (!empty($_POST)){
     }
     if (empty($zip_code)) {
       $zip_error= 'The field zip code is empty, please fill that out.';
-    }else{    
-      $entry = [$name, $address, $city, $state, $zip_code, $phone_number];
-      array_push($address_book, $entry);
-      writeCSV('address_book.csv', $address_book);
     }
-    
-     
-    $error_msg = [$name_error, $address_error, $city_error, $state_error, $zip_error, $phone_error];
-    $string_message =implode("\n", $error_msg);
-    var_dump($string_message);
-}
 
+    if (!empty($error_msg)) {
+      $entry = [$name, $address, $city, $state, $zip_code, $phone_number];
+      array_push($addresses, $entry);
+      $book->write_address_book($addresses);
+    }else{
+      $error_msg = [$name_error, $address_error, $city_error, $state_error, $zip_error, $phone_error];
+      $string_message =implode("\n", $error_msg);
+      var_dump($string_message);
+    }    
+    
+    
+}
 
 ?>
 
@@ -90,11 +94,11 @@ if (!empty($_POST)){
 <body> 
 	<h2>Address Book</h2>
 	  <table>
-             <? foreach($address_book as $entry): ?>
+             <? foreach($addresses as $entry): ?>
              <tr>
                   <? foreach ($entry as $record) : ?>
-                           <td> <?= htmlspecialchars(strip_tags($record)); ?></td> 
-                   <? array_push($address_book, $record);
+                           <td> <?= htmlspecialchars(strip_tags($record)); ?> <!--<a href ='?remove' ?>>Remove</a></td> -->
+                   <? array_push($addresses, $record);
                    endforeach;?>
              </tr>
             <?endforeach;?>

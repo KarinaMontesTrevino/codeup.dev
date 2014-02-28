@@ -40,6 +40,11 @@ class AddressDataStore {
       }
             fclose($handle);
     }
+     // Executes when class no longer referenced
+    function __destruct() 
+    {
+        echo "Class Dismissed";
+    }
 }
 
 // Creates a new instance of AddressDataStore
@@ -109,6 +114,8 @@ if (isset($_GET['remove'])) {
   exit; 
 }
 
+// Destroy the $book variable
+unset($book);
 ?>
 
 <!DOCTYPE html>

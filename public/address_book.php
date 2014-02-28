@@ -1,47 +1,12 @@
 <?php
+// include my address_data_store class
+include('classes/address_data_store.php');
+
 // Used for debbuging purposes
 var_dump($_POST);
 var_dump($_GET);
 var_dump($_FILES);
 
-// Class that handles a file and has one constructor and two methods, one to open a file and another to read that file
-class AddressDataStore {  
-   public $filename ='';
-
-  function __construct($filename = 'address_book.csv')
-  {
-    $this->filename = $filename;
-  }
-
-  function read_address_book()
-  {
-      // creates an empty array
-      $contents = [];
-     // opens the file in mode read only
-      $handle = fopen($this ->filename, 'r');
-       // while is not finished from reading the file
-      while (($data = fgetcsv($handle)) !== FALSE)
-      {
-         // put the contents of the file in an array
-         $contents[] = $data;
-      }
-      // close
-      fclose($handle);
-      // return the array contents
-      return $contents;
- }
-
-  function write_address_book($addresses){
-      // code to write $addresses_array to file $this->filename
-     $handle = fopen($this->filename, 'w');
-     foreach ($addresses as  $address) 
-      {
-            fputcsv($handle, $address);
-      }
-            fclose($handle);
-    }
-    
-}
 
 // Creates a new instance of AddressDataStore
 $book = new AddressDataStore();

@@ -1,30 +1,41 @@
 <?php
 // Used for debbuging purposes
 var_dump($_POST);
+var_dump($_GET);
+var_dump($_FILES);
 
-// encapsulating into this class
+// Class that handles a file and has one constructor and two methods, one to open a file and another to read that file
 class AddressDataStore {  
    public $filename ='';
-  function read_address_book(){
+
+  function __construct($filename = 'address_book.csv')
+  {
+    $this->filename = $filename;
+  }
+
+  function read_address_book()
+  {
       // creates an empty array
       $contents = [];
      // opens the file in mode read only
-      $handle = fopen($this->filename, 'r');
-     // while is not finished from reading the file
-     while (($data = fgetcsv($handle)) !== FALSE){
-       // put the contents of the file in an array
-       $contents[] = $data;
+      $handle = fopen($this ->filename, 'r');
+       // while is not finished from reading the file
+      while (($data = fgetcsv($handle)) !== FALSE)
+      {
+         // put the contents of the file in an array
+         $contents[] = $data;
       }
-  // close
-  fclose($handle);
-  // return the array contents
-  return $contents;
-  }
+      // close
+      fclose($handle);
+      // return the array contents
+      return $contents;
+ }
 
   function write_address_book($addresses){
       // code to write $addresses_array to file $this->filename
      $handle = fopen($this->filename, 'w');
-     foreach ($addresses as  $address) {
+     foreach ($addresses as  $address) 
+      {
             fputcsv($handle, $address);
       }
             fclose($handle);
@@ -32,56 +43,70 @@ class AddressDataStore {
 }
 
 // Creates a new instance of AddressDataStore
-$book = new AddressDataStore ();
-$book->filename = 'address_book.csv';
+$book = new AddressDataStore();
 $addresses = $book->read_address_book();
 
 $error_msg =[];
-$name_error = '';
-$address_error ='';
-$city_error = '';
-$state_error = '';
-$zip_error = '';
-$phone_error ='';
-$string_message = '';
-// checks if post is not empty
-if (!empty($_POST)){
+// Checks if post is not empty and iterates through each entry of $_POST
+if (!empty($_POST))
+{
 
-    $name = $_POST['name'];
-    $address = $_POST['address'];
-    $city = $_POST['city'];
-    $state = $_POST['state'];
-    $zip_code = $_POST['zip_code'];
-    $phone_number = $_POST['phone_number'];
-        
+    $entry = [];
+    $entry['name'] = $_POST['name'];
+    $entry ['address'] = $_POST['address'];
+    $entry ['city'] = $_POST['city'];
+    $entry ['state'] = $_POST['state'];
+    $entry ['zip_code'] = $_POST['zip_code'];
 
-    if (empty($name)) {
-      $name_error = 'The field name is empty, please fill that out.';
+    foreach ($entry as $key => $value)
+    {
+      if(empty($value))
+      {
+         array_push($error_msg, "{$key} must have a value.");
+      }
     }
-    if (empty($address)) {
-      $address_error = 'The field address is empty, please fill that out.';
-    }
-    if(empty($city)) {
-      $city_error = 'The field city is empty, please fill that out.';
-    }
-    if (empty($state)) {
-      $state_error = 'The field state is empty, please fill that out.';
-    }
-    if (empty($zip_code)) {
-      $zip_error= 'The field zip code is empty, please fill that out.';
-    }
+   
+    $entry['phone_number'] = $_POST['phone_number'];
 
-    if (!empty($error_msg)) {
-      $entry = [$name, $address, $city, $state, $zip_code, $phone_number];
-      array_push($addresses, $entry);
+    if (empty($error_msg))
+    {
+      array_push($addresses, array_values($entry));
       $book->write_address_book($addresses);
-    }else{
-      $error_msg = [$name_error, $address_error, $city_error, $state_error, $zip_error, $phone_error];
-      $string_message =implode("\n", $error_msg);
-      var_dump($string_message);
-    }    
+
+    }
     
-    
+}
+
+// Allows to upload a file when the file is not empty
+if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) 
+{
+
+        // Set the destination directory for uploads
+        $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+        // Grab the filename from the uploaded file by using basename
+        $newfilename = basename($_FILES['upload_file']['name']);
+        // Create the saved filename using the file's original name and our upload directory
+        $saved_filename = $upload_dir . $newfilename;
+        // Move the file from the temp location to our uploads directory
+        move_uploaded_file($_FILES['upload_file']['tmp_name'], $saved_filename); 
+        
+        // create new instances of AddressDataStore when user uploads a file
+        $book_upload = new AddressDataStore($saved_filename);
+        $addresses_upload= $book_upload->read_address_book();    
+        // merge addresses_upload with $addresses
+        $addresses = array_merge($addresses,$addresses_upload);
+        // $book to write out merged data
+        $book->write_address_book($addresses);
+}
+
+if (isset($_GET['remove'])) {
+  $key = $_GET['remove']; 
+// Remove item from list and save new list
+  unset($addresses[$key]);
+  $book->write_address_book($addresses);
+
+  header("Location: address_book.php");
+  exit; 
 }
 
 ?>
@@ -94,17 +119,25 @@ if (!empty($_POST)){
 <body> 
 	<h2>Address Book</h2>
 	  <table>
-             <? foreach($addresses as $entry): ?>
+             <? foreach($addresses as $key => $entry): ?>
              <tr>
                   <? foreach ($entry as $record) : ?>
-                           <td> <?= htmlspecialchars(strip_tags($record)); ?> <!--<a href ='?remove' ?>>Remove</a></td> -->
+                           <td> <?= htmlspecialchars(strip_tags($record)); ?></td>
                    <? array_push($addresses, $record);
-                   endforeach;?>
+                   endforeach;?> <td><a href ='?remove=<?=$key;?>'>Remove</a></td>  <!-- this will create a remove link to remove an entry-->
              </tr>
             <?endforeach;?>
              
 	  </table>
-	  <h2>New Entry</h2>
+      <? if(!empty($error_msg)) :?>
+      <h3>Errors:</h3>
+          <ul>
+               <? foreach ($error_msg as $error) : ?>
+                 <li><?= $error; ?></li>
+               <? endforeach; ?>
+          </ul>
+      <?endif; ?>
+    <h2>New Entry</h2>
       <form method="POST" enctype= "multipart/form-data" action = "">
       	  <p>
       	  	<label for = "name">Name: </label>
@@ -131,11 +164,16 @@ if (!empty($_POST)){
          </p>
          <p>
          	<input type="submit">
-         </p>
-              <h3>[Errors]</h3>
-              <p><?= $string_message; ?></p>
+         </p> 
+      </form>
+      <h2>Upload File</h2>
+       <form method="POST" enctype = "multipart/form-data" action = "address_book.php">
+
+              <p>
+                 <label for ="upload_file">File to add to list:</label>
+                 <input id="upload_file" name="upload_file" type="file">
+                 <br><input type="submit" value="Upload">
+              </p>      
       </form>
 </body>
 </html>
-
-

@@ -1,6 +1,6 @@
 <?php
 // include my address_data_store class
-include('classes/address_data_store.php');
+require_once('classes/address_data_store.php');
 
 // Used for debbuging purposes
 var_dump($_POST);

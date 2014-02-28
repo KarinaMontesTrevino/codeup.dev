@@ -40,11 +40,7 @@ class AddressDataStore {
       }
             fclose($handle);
     }
-     // Executes when class no longer referenced
-    function __destruct() 
-    {
-        echo "Class Dismissed";
-    }
+    
 }
 
 // Creates a new instance of AddressDataStore
@@ -103,7 +99,7 @@ if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0)
         // $book to write out merged data
         $book->write_address_book($addresses);
 }
-
+// Remove an entry via $_GET
 if (isset($_GET['remove'])) {
   $key = $_GET['remove']; 
 // Remove item from list and save new list
@@ -114,8 +110,6 @@ if (isset($_GET['remove'])) {
   exit; 
 }
 
-// Destroy the $book variable
-unset($book);
 ?>
 
 <!DOCTYPE html>

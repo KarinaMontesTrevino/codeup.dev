@@ -1,5 +1,5 @@
 <?php
-// include my address_data_store class
+// Similar to require but this checks if the file has already been included
 require_once('classes/address_data_store.php');
 
 // Used for debbuging purposes

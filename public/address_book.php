@@ -15,33 +15,38 @@ $book = new AddressDataStore('address_book.csv');
 $addresses = $book->read();
 $error_msg =[];
 // Checks if post is not empty and iterates through each entry of $_POST
-if (!empty($_POST))
-{
+if (!empty($_POST)){
+   try{
 
-    $entry = [];
-    $entry['name'] = $_POST['name'];
-    $entry ['address'] = $_POST['address'];
-    $entry ['city'] = $_POST['city'];
-    $entry ['state'] = $_POST['state'];
-    $entry ['zip_code'] = $_POST['zip_code'];
 
-    foreach ($entry as $key => $value){
-     
-      if (empty($value)||strlen($value) > 125) {
-        throw new Exception ("{$key} must be less than 125 characters or shouldn't be empty" );
-      }
-      //array_push($error_msg, "$Key must have a value.")
-    }
-   
-    $entry['phone_number'] = $_POST['phone_number'];
-     
-    // If our array of error is empty (doesn't have any errors stored) then it will add entries to the array addresses
-    if (empty($error_msg))
-    {
-      array_push($addresses, array_values($entry));
-      $book->write($addresses);
+        $entry = [];
+        $entry['name'] = $_POST['name'];
+        $entry ['address'] = $_POST['address'];
+        $entry ['city'] = $_POST['city'];
+        $entry ['state'] = $_POST['state'];
+        $entry ['zip_code'] = $_POST['zip_code'];
 
-    }
+        foreach ($entry as $key => $value){
+         
+          if (empty($value)||strlen($value) > 125) {
+            throw new Exception ("{$key} must is greater than 125 characters or it is empty" );
+          }
+          //array_push($error_msg, "$Key must have a value.")
+        }
+       
+        $entry['phone_number'] = $_POST['phone_number'];
+         
+        // If our array of error is empty (doesn't have any errors stored) then it will add entries to the array addresses
+        if (empty($error_msg))
+        {
+          array_push($addresses, array_values($entry));
+          $book->write($addresses);
+
+        }
+  }catch (Exception $Exception){
+    
+    echo $exception_error_msg = $Exception -> getMessage();
+  }      
     
 }
 

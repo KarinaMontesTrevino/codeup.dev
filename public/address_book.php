@@ -7,11 +7,12 @@ var_dump($_POST);
 var_dump($_GET);
 var_dump($_FILES);
 
+$addresses = array();
+
 
 // Creates a new instance of AddressDataStore
-$book = new AddressDataStore();
-$addresses = $book->read_address_book();
-
+$book = new AddressDataStore('address_book.csv');
+$addresses = $book->read_csv();
 $error_msg =[];
 // Checks if post is not empty and iterates through each entry of $_POST
 if (!empty($_POST))
@@ -30,6 +31,7 @@ if (!empty($_POST))
       {
          array_push($error_msg, "{$key} must have a value.");
       }
+
     }
    
     $entry['phone_number'] = $_POST['phone_number'];
@@ -37,7 +39,8 @@ if (!empty($_POST))
     if (empty($error_msg))
     {
       array_push($addresses, array_values($entry));
-      $book->write_address_book($addresses);
+      var_dump($addresses);
+      $book->write_csv($addresses);
 
     }
     
@@ -55,21 +58,20 @@ if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0)
         $saved_filename = $upload_dir . $newfilename;
         // Move the file from the temp location to our uploads directory
         move_uploaded_file($_FILES['upload_file']['tmp_name'], $saved_filename); 
-        
         // create new instances of AddressDataStore when user uploads a file
         $book_upload = new AddressDataStore($saved_filename);
-        $addresses_upload= $book_upload->read_address_book();    
+        $addresses_upload= $book_upload->read_csv();    
         // merge addresses_upload with $addresses
         $addresses = array_merge($addresses,$addresses_upload);
         // $book to write out merged data
-        $book->write_address_book($addresses);
+        $book->write_csv($addresses);
 }
 // Remove an entry via $_GET
 if (isset($_GET['remove'])) {
   $key = $_GET['remove']; 
 // Remove item from list and save new list
   unset($addresses[$key]);
-  $book->write_address_book($addresses);
+  $book->write_csv($addresses);
 
   header("Location: address_book.php");
   exit; 

@@ -57,6 +57,7 @@ class TodoList extends FileStore{
 $list = new TodoList('todo.txt');
 $items = $list->read();
  
+try{ 
 // Check for removal from list - process if exists
 if (isset($_GET['remove'])) {
   $list->remove_item($_GET['remove'], 'todo-list.php');
@@ -67,10 +68,14 @@ if (isset($_POST['newitem'])) {
 
   if (strlen($_POST['newitem'])> 240 || empty($_POST['newitem'])  ){
 
-     throw new Exception("Item should be less than 240");
+     throw new Exception("Item should be less than 240 or shouldn't be empty");
   }
    $item = ($_POST['newitem']);
    $list->add_item($item);
+}
+} catch(Exception $Exception){
+
+   echo $Exception-> getMessage();
 }
 
 

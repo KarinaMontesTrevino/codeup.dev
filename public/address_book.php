@@ -25,15 +25,12 @@ if (!empty($_POST))
     $entry ['state'] = $_POST['state'];
     $entry ['zip_code'] = $_POST['zip_code'];
 
-    foreach ($entry as $key => $value)
-    {
-      if(empty($value) || strlen($value)> 125)
-      {
-          throw new Exception("Error you can't have an empty field and you can't exceed 125 characters", 1);
-         
-         array_push($error_msg, "{$key} must have a value.");
+    foreach ($entry as $key => $value){
+     
+      if (empty($value)||strlen($value) > 125) {
+        throw new Exception ("{$key} must be less than 125 characters or shouldn't be empty" );
       }
-
+      //array_push($error_msg, "$Key must have a value.")
     }
    
     $entry['phone_number'] = $_POST['phone_number'];
@@ -84,11 +81,11 @@ if (isset($_GET['remove'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+  <title></title>
 </head>
 <body> 
-	<h2>Address Book</h2>
-	  <table>
+  <h2>Address Book</h2>
+    <table>
              <? foreach($addresses as $key => $entry): ?>
              <tr>
                   <? foreach ($entry as $record) : ?>
@@ -98,7 +95,7 @@ if (isset($_GET['remove'])) {
              </tr>
             <?endforeach;?>
              
-	  </table>
+    </table>
       <? if(!empty($error_msg)) :?>
       <h3>Errors:</h3>
           <ul>
@@ -109,12 +106,12 @@ if (isset($_GET['remove'])) {
       <?endif; ?>
     <h2>New Entry</h2>
       <form method="POST" enctype= "multipart/form-data" action = "">
-      	  <p>
-      	  	<label for = "name">Name: </label>
-      	    <input id="name" type ="text" name = "name" placeholder = "Name or place here">
-      	  </p>
-      	  <p>
-      	    <label for = "address">Address: </label>
+          <p>
+            <label for = "name">Name: </label>
+            <input id="name" type ="text" name = "name" placeholder = "Name or place here">
+          </p>
+          <p>
+            <label for = "address">Address: </label>
             <input id="address" type ="text" name = "address" placeholder = "Street address here">
           </p>
           <p>
@@ -122,18 +119,18 @@ if (isset($_GET['remove'])) {
             <input id="city" type ="text" name = "city" placeholder = "City here">
           </p>
           <p>
-          	<label for = "state">State: </label>
+            <label for = "state">State: </label>
             <input id="state" type ="text" name = "state" placeholder = "State here">
           </p>
           <p>
-          	 <label for = "zip_code">Zip Code: </label>
+             <label for = "zip_code">Zip Code: </label>
             <input id="zip_code" type ="text" name = "zip_code" placeholder = "Zip code here">
           </p>
             <label for = "phone_number">Phone number: </label>  
             <input id="phone_number" type ="text" name = "phone_number" placeholder = "Phone number here">
          </p>
          <p>
-         	<input type="submit">
+          <input type="submit">
          </p> 
       </form>
       <h2>Upload File</h2>

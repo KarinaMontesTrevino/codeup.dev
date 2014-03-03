@@ -150,10 +150,10 @@ if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) {
                  <label for ="upload_file">File to add to list:</label>
                  <input id="upload_file" name="upload_file" type="file">
                  <br><input type="submit" value="Upload">
-                 <input type="checkbox" name="checkboxfile" value="true" checked> Do you want to override your file? 
+                 <input type="checkbox" name="checkboxfile" value="yes" checked> Do you want to override your file? 
               </p>
                    <? //Check if we saved a file
-                   if (isset($saved_file)) :
+                   if (isset($saved_filename)) :
                        //If we did, show a link to the uploaded file
                       echo "<p>You can download your file <a href='/uploads/{$newfilename}'>here</a>.</p>";
                    endif; ?> 

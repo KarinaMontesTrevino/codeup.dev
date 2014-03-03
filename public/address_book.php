@@ -27,19 +27,21 @@ if (!empty($_POST))
 
     foreach ($entry as $key => $value)
     {
-      if(empty($value))
+      if(empty($value) || strlen($value)> 125)
       {
+          throw new Exception("Error you can't have an empty field and you can't exceed 125 characters", 1);
+         
          array_push($error_msg, "{$key} must have a value.");
       }
 
     }
    
     $entry['phone_number'] = $_POST['phone_number'];
-
+     
+    // If our array of error is empty (doesn't have any errors stored) then it will add entries to the array addresses
     if (empty($error_msg))
     {
       array_push($addresses, array_values($entry));
-      var_dump($addresses);
       $book->write($addresses);
 
     }

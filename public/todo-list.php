@@ -36,13 +36,9 @@ class TodoList extends FileStore{
   // Add item to list, return new list
   public function add_item($item) {
 
-    // if ((strlen($item)<= 240) && (!empty($item))){ 
       $new_item = htmlspecialchars(strip_tags($item));
       array_push($this->items, $new_item);
       $this->write($this->items);
-  // }else{
-    // throw new Exception("The item you are entering is empty or you exceed 240 characters");
-  // } 
  }
  
   // Remove item from list, redirect optional
@@ -67,10 +63,14 @@ if (isset($_GET['remove'])) {
 }
  
 // Check for new item - process if exists
-if (!empty($_POST['newitem'])&& (strlen($_POST['newitem']> 240))) {
-  $list->add_item($_POST['newitem']);
-}else{
-  throw new Exception("The item you are entering is empty or you exceed 240 characters");
+if (isset($_POST['newitem'])) {
+
+  if (strlen($_POST['newitem'])> 240 || empty($_POST['newitem'])  ){
+
+     throw new Exception("Item should be less than 240");
+  }
+   $item = ($_POST['newitem']);
+   $list->add_item($item);
 }
 
 
@@ -93,7 +93,7 @@ if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) {
         if (isset($_POST['checkboxfile'])&& $_POST['checkboxfile'] == 'yes')
         {
             $items = $upload_items;
-            $list->write=$filename;
+            $list->write($items);
         }
         else
         {
@@ -107,10 +107,6 @@ if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) {
      } 
 }            
 
-
- 
-    
- 
 ?>
 <!DOCTYPE HTML!>
 <html>

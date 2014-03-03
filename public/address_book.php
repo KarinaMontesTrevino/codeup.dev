@@ -146,6 +146,11 @@ if (isset($_GET['remove'])) {
                  <input id="upload_file" name="upload_file" type="file">
                  <br><input type="submit" value="Upload">
               </p>      
+              <? //Check if we saved a file
+                   if (isset($saved_filename)) :
+                       //If we did, show a link to the uploaded file
+                      echo "<p>You can download your file <a href='/uploads/{$newfilename}'>here</a>.</p>";
+                   endif; ?> 
       </form>
 </body>
 </html>

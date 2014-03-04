@@ -1,0 +1,22 @@
+<html>
+<head>
+       <title> Javascript Objects</title>
+</head>
+<body>
+    <script> 
+       var baker = {};
+       baker.ingredient1 = 'butter';
+       baker.ingredient2 = 'flour';
+       baker.mix = function(){
+       	console.log('Mixing ' + this.ingredient1 + ' and ' + this.ingredient2);
+       };
+         baker.mix(); // calling the method with the original ingredients
+         baker.ingredient2 = 'milk'; // assigning new ingredient to ingredient number 2
+         baker.mix(); // calling the method with the original ingredient 1 and the modified ingredient 2
+         
+         baker.ingredient2 = 'twinkies'; // repeats the behavior mentioned above
+         baker.mix();
+
+    </script>
+</body>
+</html>

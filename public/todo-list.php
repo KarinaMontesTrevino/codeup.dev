@@ -1,12 +1,14 @@
 
 <?php   
 require_once('classes/filestore.php');
+class InvalidInputException extends Exception{}
 // Usedfor debugging purposes
 var_dump($_POST);  // This shows the contents of the method POST
 var_dump($_GET);   // This shows the contents of the method GET
 var_dump($_FILES); // Shows the contents of the method FILES
 $filename = "todo.txt";
 $error_msg = false;
+$exceptionError ='';
 
 class TodoList extends FileStore{
  
@@ -68,14 +70,14 @@ if (isset($_POST['newitem'])) {
 
   if (strlen($_POST['newitem'])> 240 || empty($_POST['newitem'])  ){
 
-     throw new Exception("Item should be less than 240 or shouldn't be empty");
+     throw new InvalidInputException("Item should have a meximum of 240 characters OR can't be empty");
   }
    $item = ($_POST['newitem']);
    $list->add_item($item);
 }
-} catch(Exception $Exception){
+} catch(InvalidInputException $Exception){
 
-   echo $Exception-> getMessage();
+   $exceptionError = $Exception-> getMessage();
 }
 
 
@@ -134,6 +136,7 @@ if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) {
             <p>
               <label for="newitem">Item to add:</label>
               <input id="newitem" name="newitem" type="text" autofocus='autofocus' placeholder="Enter new TODO item">
+              <?= $exceptionError?>
             </p>
             <p>
               <input type="submit" value="Add Item">

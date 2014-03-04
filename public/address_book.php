@@ -1,4 +1,7 @@
 <?php
+
+class InvalidInputException extends Exception{}
+
 // Similar to require but this checks if the file has already been included
 require_once('classes/address_data_store.php');
 
@@ -29,7 +32,7 @@ if (!empty($_POST)){
         foreach ($entry as $key => $value){
          
           if (empty($value)||strlen($value) > 125) {
-            throw new Exception ("{$key} must is greater than 125 characters or it is empty" );
+            throw new InvalidInputException ("{$key} is greater than 125 characters or the field is empty" );
           }
           //array_push($error_msg, "$Key must have a value.")
         }
@@ -43,9 +46,9 @@ if (!empty($_POST)){
           $book->write($addresses);
 
         }
-  }catch (Exception $Exception){
+  }catch (InvalidInputException $exception){
     
-    echo $exception_error_msg = $Exception -> getMessage();
+    echo "[Error]: " . $exception-> getMessage();
   }      
     
 }
@@ -90,7 +93,7 @@ if (isset($_GET['remove'])) {
 </head>
 <body> 
   <h2>Address Book</h2>
-    <table>
+    <table border="1" style="width:400px">
              <? foreach($addresses as $key => $entry): ?>
              <tr>
                   <? foreach ($entry as $record) : ?>
@@ -113,7 +116,7 @@ if (isset($_GET['remove'])) {
       <form method="POST" enctype= "multipart/form-data" action = "">
           <p>
             <label for = "name">Name: </label>
-            <input id="name" type ="text" name = "name" placeholder = "Name or place here">
+            <input id="name" type ="text" name = "name" placeholder = "Name or place here" autofocus ="autofocus">
           </p>
           <p>
             <label for = "address">Address: </label>

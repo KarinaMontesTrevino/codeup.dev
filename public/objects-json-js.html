@@ -1,0 +1,68 @@
+<<html>
+<head>
+	<title></title>
+</head>
+<body>
+      <script>
+              // todo:
+				// Create an array of object that represent books.
+				// Each book should have a title and an author.
+				// The book author should be an object with a firstName and lastName.
+				// Be creative and add at least 5 books to the array
+				var books = [
+			             { 
+			                "Title": "Alchemist",
+			                "Author": { 
+			                	        "firstName":  "Paulo",
+			                            "lastName": "Coehlo"
+			                        }
+			             }, 
+			             { 			       
+				            "Title": "Eva Luna", 
+				            "Author": {
+				            	         "firstName": "Isabel",
+				                         "lastName": "Allende"
+				                   }
+			             }, 
+			             { 
+			               "Title": "Secret",
+						   "Author": {
+						   	             "firstName": "Rhonda",
+						                 "lastName": "Byrne"
+						           }
+						 },
+			             { 
+			               "Title": "Harry Potter",
+			               "Author": {
+			               	          "firstName": "J K", 
+			                          "lastName": "Rowling"
+			                       }
+			             },
+			             {
+			              "Title": "Song of ice and fire",
+						  "Author": {
+						  	         "firstName": "George",
+						             "lastName": "Martin"
+						         }
+						 }
+				    ];
+
+				// log out the books array
+				console.log(books);
+
+				// todo:
+				// Loop through the array of books using .forEach and print out the specified information about each one.
+				// start loop here
+
+                  books.forEach(function (element, index, books){
+					   console.log("Book #" + index);
+		               console.log("Title: " + element.Title);
+		               console.log("Author: " + element.Author.firstName + " " + element.Author.lastName);
+	                    console.log("---");
+
+                  });
+				// end loop here
+
+      </script>
+</body>
+</html>

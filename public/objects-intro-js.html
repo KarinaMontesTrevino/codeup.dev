@@ -6,20 +6,17 @@
       <script>
               // todo:
 			// Create person object with firstName and lastName properties (set to your first and last name).
-			   var person = {};
-               person.firstName = 'Karina';
-               person.lastName = 'Montes-Trevino';
-               person.first_last_name = person.firstName + " " + person.lastName;
-
+			   var person = {
+            'firstName': 'Karina',
+            'lastName': 'Montes-Trevino'
+          };
 			// todo:
 			// Add a say hello method to the person object that alerts hello using the firstName and lastName properties.
             person.sayHello = function(){
-                   alert('Hello ' + person.first_last_name);
+                   alert('Hello ' + person.firstName + ' ' + person.lastName );
             }; 
       			// Say hello from the person object.
       			 person.sayHello();
-             person.first_last_name = prompt('What is your Name?');
-             person.sayHello(); 
 
       </script>
 </body>

@@ -1,0 +1,114 @@
+/* 
+this content is stored in a file named "site.css" 
+in a directory named "css" in the web root 
+*/
+
+#h1header{
+	text-shadow: 5px 5px 5px #B1888D;
+    color: #AB3244;
+    text-decoration: underline;
+    font-weight: bold;
+    font-family: 'Lobster', Georgia, Times, serif;
+    font-size: 70px;
+    line-height: 100px;
+}
+
+.h2header{
+    color: #71A878;
+    text-decoration: underline;
+    font-family: 'Cabin', Helvetica, Arial, sans-serif;
+    font-size: 25px;
+    line-height: 35px;
+
+}
+
+html{ background-color: }
+
+body { background-image: url('../img/woven.png');  }
+
+ul { list-style: decimal-leading-zero;
+	font-family: 'Cabin', Helvetica, Arial, sans-serif;
+    font-size: 25px;
+    line-height: 35px;
+}
+
+div{  
+     color: #F2E2A5;
+	 font-family: 'Cabin', Helvetica, Arial, sans-serif;
+     font-size: 25px;
+     line-height: 35px;
+}
+
+.copy {
+	color: #A28A6E;
+	font-family: 'Cabin', Helvetica, Arial, sans-serif;
+     font-size: 25px;
+     line-height: 35px;
+}
+
+.container{
+
+	/* How pronounced should the 3D effects be */
+	perspective: 300px;
+	-webkit-perspective: 500px;
+
+	background: #FFF;
+	width: 500px;
+	height: 430px;
+	margin: 0 auto;
+	border-radius:5px;
+	position:relative;
+	float:right;
+}
+
+.front-post,
+.back-post{
+
+	/* Enable 3D transforms */
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+
+	/* We are using two separate divs for the front and back of the
+	   phone. This will hide the divs when they are flipped, so that the
+	   opposite side can be seen:  */
+
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+
+	width:450px;
+	height:403px;
+
+	position:absolute;
+	top:48%;
+	left:24%;
+	margin:-186px 0 0 -100px;
+
+	background:url("../img/todo.jpg") no-repeat left center;
+
+	/* Animate the transitions */
+	transition:1.8s;
+}
+
+.back-post{
+
+	/* The back side is flipped 180 deg by default */
+	transform:rotateY(180deg);
+	-webkit-transform:rotateY(180deg);
+
+	background-position:right center;
+}
+
+.container:hover .front-post{
+	/* When the container is hovered, flip the front side and hide it .. */
+	transform:rotateY(180deg);
+	-webkit-transform:rotateY(180deg);
+}
+
+.container:hover .back-post{
+	/* .. at the same time flip the back side into visibility */
+	transform:rotateY(360deg);
+	-webkit-transform:rotateY(360deg);
+}
+
+
+

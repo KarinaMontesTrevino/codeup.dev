@@ -2,11 +2,9 @@
 <?php   
 require_once('classes/filestore.php');
 class InvalidInputException extends Exception{}
-// Usedfor debugging purposes
-var_dump($_POST);  // This shows the contents of the method POST
-var_dump($_GET);   // This shows the contents of the method GET
-var_dump($_FILES); // Shows the contents of the method FILES
+// indicating what is the file where we want to store all the to do items
 $filename = "todo.txt";
+// initialization of the variables
 $error_msg = false;
 $exceptionError ='';
 
@@ -22,8 +20,6 @@ class TodoList extends FileStore{
       $this->filename = $filename;
       $this->items = $this->get_list();
     }
-
-    var_dump($this);
   }
  
   // Returns an array of todo items
@@ -70,7 +66,7 @@ if (isset($_POST['newitem'])) {
 
   if (strlen($_POST['newitem'])> 240 || empty($_POST['newitem'])  ){
 
-     throw new InvalidInputException("Item should have a meximum of 240 characters OR can't be empty");
+     throw new InvalidInputException("Item should have a maximum of 240 characters OR can't be empty");
   }
    $item = ($_POST['newitem']);
    $list->add_item($item);
@@ -119,9 +115,17 @@ if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) {
 <html>
 <head>
   <title>ToDo List</title>
+   <link rel="stylesheet" href="/css/todo.css" >
+   <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+   <link href="http://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" type="text/css">
 </head>
 <body>
-      <h1>ToDo List</h1>
+  <div class= "container">    
+          <div class = "back-post" > </div>
+          <div class = "front-post"> </div> 
+    </div> 
+  <div>
+      <h1 id="h1header">Daily to do list:</h1>
       <? if (count($list->items) > 0 ): ?>
         <ul>
           <? foreach ($items as $key => $item): ?>
@@ -131,8 +135,8 @@ if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) {
       <? else: ?>
         <p>You have 0 todo items.</p>
       <? endif; ?>
-      <h2>Add new item to list</h2>
-          <form method="POST" action="">
+      <h2 class="h2header">Add new item to list</h2>
+      <form method="POST" action="">
             <p>
               <label for="newitem">Item to add:</label>
               <input id="newitem" name="newitem" type="text" autofocus='autofocus' placeholder="Enter new TODO item">
@@ -141,12 +145,12 @@ if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) {
             <p>
               <input type="submit" value="Add Item">
             </p>
-          </form>
+     </form>
             <? if  ($error_msg == true) :
                   echo "<p>You can't upload that file, we can only process .txt files</p>";
               endif; ?> 
       
-      <h2>Upload File</h2>
+      <h2 class="h2header">Upload File</h2>
       <form method="POST" enctype = "multipart/form-data" action = "todo-list.php">
 
               <p>
@@ -160,5 +164,9 @@ if (count($_FILES) > 0 && $_FILES['upload_file']['error'] == 0) {
                        //If we did, show a link to the uploaded file
                       echo "<p>You can download your file <a href='/uploads/{$newfilename}'>here</a>.</p>";
                    endif; ?> 
+    </div>
+    <div class = "copy"> 
+          <p>&copy; Karina Montes-Trevino</p> 
+    </div>    
 </body>
 </html>

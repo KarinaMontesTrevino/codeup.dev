@@ -4,14 +4,12 @@
 	  <Title>Box Model Exercise</title> 
 	  <style type="text/css">
 
-       #container{
-           width: 450px;
-           height: 450px;
-           border: none;
-           margin: none;
+      h1{
+        margin-bottom: 50px;
+       
       }
 
-       .boxes {
+       div {
         	border: solid 1px #000000;
 	        width: 50px;
             height: 50px;
@@ -19,97 +17,107 @@
         	margin-top: 50px;
             margin-right: 50px;
         	font-weight: bold;
-        	padding: 11px;
-            position: relative; 
+        	padding: 10px;
+            position: relative;
+            float: left; 
         }
-        
+
         #box1{
         	background-color: #F00;
-            float: left;
+        
         }    
         
         #box2{
         	background-color: #FF9900;
-             float: left; 
+             
 
         }
 
         #box3{
         	background-color: #FF0;
-             float: left; 
+              
         }
 
         #box4{
         	background-color: #009900;
-        	float :left;	
-            
+            clear: left;		
         }
 
         #box5{
         	background-color: #00F;	
-            float: left; 
+            
 
         }
 
          #box6{
         	background-color: #E066FF;
-           float: left;	
+          
         }
 
-        img{
+        div>img{
             top:-40px;
             right: -40px;
             position: absolute;
         }
 
         .animated { 
-    -webkit-animation-duration: 3s; 
-    animation-duration: 3s; 
-    -webkit-animation-fill-mode: both; 
-    animation-fill-mode: both; 
-    -webkit-animation-timing-function: linear; 
-    animation-timing-function: linear; 
-    animation-iteration-count:infinite; 
-    -webkit-animation-iteration-count:infinite; 
-} 
+            -webkit-animation-duration: 5s; 
+            animation-duration: 5s; 
+            -webkit-animation-fill-mode: both; 
+            animation-fill-mode: both; 
+            -webkit-animation-timing-function: ease-in-out; 
+            animation-timing-function: ease-in-out; 
+            animation-iteration-count:infinite; 
+            -webkit-animation-iteration-count:infinite; 
+        } 
 
-@-webkit-keyframes hinge { 
-    0% { -webkit-transform: rotate(0); -webkit-transform-origin: top left; -webkit-animation-timing-function: ease-in-out; } 
-    20%, 60% { -webkit-transform: rotate(80deg); -webkit-transform-origin: top left; -webkit-animation-timing-function: ease-in-out; } 
-    40% { -webkit-transform: rotate(60deg); -webkit-transform-origin: top left; -webkit-animation-timing-function: ease-in-out; } 
-    80% { -webkit-transform: rotate(60deg) translateY(0); opacity: 1; -webkit-transform-origin: top left; -webkit-animation-timing-function: ease-in-out; } 
-    100% { -webkit-transform: translateY(700px); opacity: 0; } 
-} 
-@keyframes hinge { 
-    0% { transform: rotate(0); transform-origin: top left; animation-timing-function: ease-in-out; } 
-    20%, 60% { transform: rotate(80deg); transform-origin: top left; animation-timing-function: ease-in-out; } 
-    40% { transform: rotate(60deg); transform-origin: top left; animation-timing-function: ease-in-out; } 
-    80% { transform: rotate(60deg) translateY(0); opacity: 1; transform-origin: top left; animation-timing-function: ease-in-out; } 
-    100% { transform: translateY(700px); opacity: 0; } 
-} 
-.hinge { 
-    -webkit-animation-name: hinge; 
-    animation-name: hinge; 
-}
+        @-webkit-keyframes bounce { 
+            0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
+            40% {-webkit-transform: translateY(-30px);} 
+            60% {-webkit-transform: translateY(-15px);} 
+        } 
+
+        @keyframes bounce { 
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+            40% {transform: translateY(-30px);} 
+            60% {transform: translateY(-15px);} 
+        } 
+
+        .bounce { 
+            -webkit-animation-name: bounce; 
+            animation-name: bounce; 
+        }
+        #ribbon{
+               position: fixed;
+               top: 0px;
+               right: 0px;
+        }
+
+        p {
+           clear: left;
+           position: fixed;
+           bottom: 0;
+           left: 0;
+        }
 		   
 	  </style>
 </head>
 <body>
-	  <div id = "container">
-	    <h1 class="animated hinge"><a href="http://en.wikipedia.org/wiki/Visible_spectrum"> Visible Spectrum Wavelengths</a></h1>
+     
+        <img  id="ribbon" src= "../img/codeup-ribbon.png">
+	    <h1 class="rainbow"><a href="http://en.wikipedia.org/wiki/Visible_spectrum"> Visible Spectrum Wavelengths</a></h1>
 	    
-        <div class = "boxes" id = "box1">620-750 nm <img src = "../img/codeup-arrow.png"></div>
+        <div class="animated bounce" id = "box1">620-750 nm <img src = "../img/codeup-arrow.png"></div>
 
-       	<div class = "boxes"id= "box2" >590-620 nm <img src = "../img/codeup-arrow.png"></div>
+       	<div class="animated bounce" id= "box2" >590-620 nm <img src = "../img/codeup-arrow.png"></div>
 
-        <div class = "boxes"id= "box3">570-590 nm <img src = "../img/codeup-arrow.png"></div>
+        <div class="animated bounce" id= "box3">570-590 nm <img src = "../img/codeup-arrow.png"></div>
 
-        <div class = "boxes"id= "box4">495-570 nm <img src = "../img/codeup-arrow.png"></div>
+        <div class="animated bounce" id= "box4">495-570 nm <img src = "../img/codeup-arrow.png"></div>
 
-       	<div class = "boxes"id= "box5">450-495 nm <img src = "../img/codeup-arrow.png"></div>
+       	<div class="animated bounce" id= "box5">450-495 nm <img src = "../img/codeup-arrow.png"></div>
 
-       	<div class = "boxes"id= "box6">380-450 nm <img src = "../img/codeup-arrow.png"></div>
-     </div>   
+       	<div class="animated bounce" id= "box6">380-450 nm <img src = "../img/codeup-arrow.png"></div>  
 </body>
-     &copy; Karina I. Montes-Trevino
+        <p>&copy; Karina I. Montes-Trevino</p>
 </html>    

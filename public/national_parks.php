@@ -4,8 +4,6 @@
 $mysqli = @new mysqli('127.0.0.1', 'codeup', 'password', 'codeup_mysqli_test_db');
 $errorname='';
 
-var_dump($_POST);
-var_dump($_GET);
 
 if (!empty($_POST['name']) &&
     !empty($_POST['location']) &&
@@ -13,7 +11,6 @@ if (!empty($_POST['name']) &&
     !empty($_POST['date_established']) &&
     !empty($_POST['area_in_acres']))
 {
-    echo "Something posted?";
        // Create the prepared statement 
       $stmt = $mysqli->prepare("INSERT INTO national_parks (name, location, description, date_established, area_in_acres) VALUES (?,?,?,?,?)");
 
@@ -76,7 +73,7 @@ $mysqli->close();
       <style>
              .jumbotron{
 		        width: 1200px;
-		        height: 400px ;
+		        height: 425px ;
 		        margin: auto;
 		        background-color: #08A5AC;
 		        font-family: 'Ubuntu', sans-serif;
@@ -87,7 +84,7 @@ $mysqli->close();
 		        font-family: 'Ubuntu', sans-serif;
 		        font-size: 20px;
               }
-              
+
       </style>
       
 </head>

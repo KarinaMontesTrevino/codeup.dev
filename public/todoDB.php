@@ -1,8 +1,5 @@
  <?php
  
-var_dump($_GET);
-var_dump($_POST);
-
 $errorMessage = null;
 $successMessage = null;
 
@@ -53,7 +50,7 @@ if (!empty($_POST))
 }
  
  
-$itemsPerPage = 2;
+$itemsPerPage = 10;
 $currentPage = !empty($_GET['page'])&& is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
 $offset = ($currentPage - 1) * $itemsPerPage;
 

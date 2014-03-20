@@ -19,6 +19,7 @@
 
 	      .panorama {
 	      	margin-left: 250px;
+	      	cursor:  all-scroll;
 	      }
 
 	      img{
@@ -61,6 +62,17 @@
           	font-size: 15px;
           }
 
+          h3{
+          	color: #E82C0C;
+          	font-family: 'Lobster';
+          	font-size: 15px;
+          }
+
+          ul{
+          	color: #FF530D;
+          }
+
+
           .animated { 
 			    -webkit-animation-duration: 10s; 
 			    animation-duration: 10s; 
@@ -102,8 +114,12 @@
 	<!-- <br><button id="toggleBtn" class="btn btn-principal">Toggle Answers</button> -->
 
 	<h1 class="animated tada"> National Parks</h1>
+
+	<!--twitter widget-->
    	<a class="twitter-timeline" href="https://twitter.com/NatlParkService" data-widget-id="446482529487302657">Tweets por @NatlParkService</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+	     </script>
+	
 	<div class="panorama"><img src="../img/yosemite3.jpg"></div>
 
    <div class= "container">
@@ -156,6 +172,30 @@
 			      	  A. Fort Smith National Historic Site is authorized 75 acres, but the current park size is 37 acres. 
 		          </dd>
 	     </dl>
+      <p>
+      	 <h2>Fun Facts of National Parks</h2>
+	     <h3>Yosemite</h3>
+		    <ul id="yosemite-facts">
+		        <li>Ribbon Falls in Yosemite National Park is 9 times larger than Niagra Falls.</li>
+		        <li>El Capitan is the largest granite block in the world.</li>
+		        <li>Sequoia Trees are the largest trees in the world.</li>
+		        <li>There are 747,956 acres of land in Yosemite National Park.</li>
+		    </ul>
+	    <h3>Yellowstone</h3>
+		    <ul id="yellowstone-facts">
+		        <li>There are over 40 major waterfalls in Yellowstone.</li>
+		        <li>Yellowstone National Park was established on March 1, 1872, 20 years before Montana, Idaho and Wyoming were granted statehood.</li>
+		        <li>A moose can keep its head underwater for 3 minutes.</li>
+		        <li>In the year 1992, Yellowstone National Park hit a record high number of visitors - over 3 Million visitors in 1 year.</li>
+		    </ul>
+		<h3>Death Valley</h3>
+		    <ul id="deathvalley-facts">
+		        <li>Historically, Death Valley has been home to Native American tribes and today, the Timbisha tribe, which has been in the valley for at least 1,000 years, inhabits the region.</li>
+		        <li>On February 11, 1933, Death Valley was made a National Monument by President Herbert Hoover. In 1994, the area was re-designated as  a National Park.</li>
+		        <li>Dozens of scenes from Star Wars have been filmed in Death Valley, including Artist's Palette (the Sandcrawler scene from Star Wars Episode IV: A New Hope), Golden Canyon (Jawa scenes from Star Wars Episode IV: A New Hope) and Mesquite Flat Sand Dunes (Droid scenes from Star Wars Episode IV: A New Hope). Blogger Steve Hall does an amazing job of lining up film scenes and locations!</li>
+		        <li>Scientists can't agree how old Ubehebe Crater is. Initial research believed it's between 2,000 to 7,000 years old, but new findings peg it at 800 years old. But everyone agree it's huge - half a mile wide and 500 to 777 feet deep.</li>
+		    </ul>
+      </p>		    
  </div>
 
       <script type="text/javascript">
@@ -181,6 +221,14 @@
 				    animationTime: 700,  
 				    easing: "ease-out",        
 				    overlay: true             
+				  });
+                 
+                  $('ul').each(function(){ 
+					$(this).children().first().css('font-weight', 'bold');
+                   });
+
+				  $('li').click(function(){
+				  	  $(this).parent().addClass('invisible');
 				  });
         });
               

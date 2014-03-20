@@ -173,7 +173,7 @@
 		          </dd>
 	     </dl>
       <p>
-      	 <h2>Fun Facts of National Parks</h2>
+      	 <h2>Fun Facts of National Parks:</h2>
 	     <h3>Yosemite</h3>
 		    <ul id="yosemite-facts">
 		        <li>Ribbon Falls in Yosemite National Park is 9 times larger than Niagra Falls.</li>
@@ -202,14 +202,15 @@
               // $ alias to jQuery
               $('document').ready(function() {
               	    // adds a class "invisible" to all dd elements
-	                $('dd').addClass('invisible');
-	                // 
-	                $('#toggleBtn').on('click', function(){
-	                	$('dd').toggleClass('invisible');
-	                });
+              	    //$('dd').addClss('invisible');
+	                $('dd').hide();
+	                // toggle effect using a button
+	                // $('#toggleBtn').on('click', function(){
+	                // 	$('dd').toggleClass('invisible');
+	                // });
 
 	                $('dt').on('click', function() {
-                    $(this).next().toggleClass('invisible');
+                    $(this).next().toggle();
                     // adds a class "clickable" to all dt elements to change the cursor  
                     $('dt').addClass('clickable');
                }); 
@@ -223,13 +224,19 @@
 				    overlay: true             
 				  });
                  
+				 
+
                   $('ul').each(function(){ 
 					$(this).children().first().css('font-weight', 'bold');
                    });
 
+
 				  $('li').click(function(){
-				  	  $(this).parent().addClass('invisible');
+				  	  $('li').addClass('clickable');
+				  	  $(this).parent().hide();
 				  });
+
+
         });
               
       </script>

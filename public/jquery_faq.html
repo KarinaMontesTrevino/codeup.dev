@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <title>jQuery FAQ</title>
+      <!--Font Awesome-->
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<!--Google Fonts-->
+	<link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+	<!--jQuery-->
+	 <script src= "/js/jquery.js"></script>
+	 <!--Panorama Viewer-->
+	 <script src="../panorama/jQuery.panorama_viewer.js"></script>
+	 <script src="../panorama/panorama_viewer.css"></script>
+	<style>
+	      .invisible{
+	      	display: none;
+	      }
+
+	      .panorama {
+	      	margin-left: 250px;
+	      }
+
+	      img{
+	      	width: 700px;
+	      	height: 300px;
+	      }
+          
+          .clickable{
+            cursor: help;
+            
+          }
+
+          body{
+          	background: url('../img/browntexture.jpg');
+          }
+
+          .container{
+          	width: 550px;
+          	height: 400px;
+          	margin-left: 330px;
+          }
+
+          h1{
+          	font-family: 'Lobster';
+          	color: #506E33;
+          	font-size: 40px;
+          	margin-left: 450px;
+          	text-decoration: underline;;
+          }
+
+          h2{
+          	font-family: 'Lobster';
+          	color: #088A7F;
+          	font-size: 25px;
+          }
+
+          dl{
+          	color: #15A55F;
+          	font-family: 'Cabin';
+          	font-size: 15px;
+          }
+
+          .animated { 
+			    -webkit-animation-duration: 10s; 
+			    animation-duration: 10s; 
+			    -webkit-animation-fill-mode: both; 
+			    animation-fill-mode: both; 
+			    animation-iteration-count:infinite; 
+			    -webkit-animation-iteration-count:infinite; 
+		   } 
+
+			@-webkit-keyframes tada { 
+			    0% {-webkit-transform: scale(1);} 
+			    10%, 20% {-webkit-transform: scale(0.9) rotate(-3deg);} 
+			    30%, 50%, 70%, 90% {-webkit-transform: scale(1.1) rotate(3deg);} 
+			    40%, 60%, 80% {-webkit-transform: scale(1.1) rotate(-3deg);} 
+			    100% {-webkit-transform: scale(1) rotate(0);} 
+			} 
+			@keyframes tada { 
+			    0% {transform: scale(1);} 
+			    10%, 20% {transform: scale(0.9) rotate(-3deg);} 
+			    30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);} 
+			    40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);} 
+			    100% {transform: scale(1) rotate(0);} 
+			} 
+			.tada { 
+			    -webkit-animation-name: tada; 
+			    animation-name: tada; 
+			}
+
+            .twitter-timeline{
+            	width: 250px;
+            	height: 280px;
+            	float: right;
+            	margin-left: 850px;
+            }
+	</style>
+</head>
+<body>
+    <!-- <img src ="../img/park.jpg"> -->
+	<!-- <br><button id="toggleBtn" class="btn btn-principal">Toggle Answers</button> -->
+
+	<h1 class="animated tada"> National Parks</h1>
+   	<a class="twitter-timeline" href="https://twitter.com/NatlParkService" data-widget-id="446482529487302657">Tweets por @NatlParkService</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	<div class="panorama"><img src="../img/yosemite3.jpg"></div>
+
+   <div class= "container">
+		 <h2>FAQ About National Parks</h2>
+	    
+	     <dl>
+		      <dt><dfn>1. How imminent is an eruption of the Yellowstone Volcano?</dfn></dt>
+			      <dd>A. There is no evidence that a catastrophic eruption at Yellowstone National Park (YNP) is imminent. Current geologic activity at Yellowstone has remained relatively constant since earth scientists first started monitoring some 30 years ago.</dd>
+
+		      <dt><dfn>2. Can I drive my private vehicle into Zion Canyon?</dfn></dt>
+			      <dd>A. From April to October access into the canyon is by free shuttle bus only. Private vehicles are allowed to access the canyon from November to mid March
+			      </dd>
+
+			  <dt><dfn>3. Do I need a reservation to visit Yosemite?</dfn></dt>
+			      <dd>A. No, you don't need a reservation to visit Yosemite. However, if you plan to spend the night in Yosemite, you should have a reservation for lodging, camping, or backpacking. (Hookups are not available in any Yosemite campgrounds.)
+		          </dd>
+
+		      <dt><dfn>4. Why is it called Death Valley?</dfn></dt>
+			      <dd>A. Death Valley was given its forbidding name by a group of pioneers lost here in the winter of 1849-1850. Even though, as far as we know, only one of the group died here, they all assumed that this valley would be their grave. They were rescued by two of their young men, William Lewis Manly and John Rogers, who had learned to be scouts. As the party climbed out of the valley over the Panamint Mountains, one of the men turned, looked back, and said "goodbye, Death Valley." This name, and the story of The Lost '49ers have become part of our western history.
+		          </dd>
+
+		      <dt><dfn>5. What is the best driving route to take to Acadia from the south?</dfn></dt>
+			      <dd>A. There are two routes:
+				     <ol>
+		                 <li> Take I-95 north to Augusta, Maine; from Augusta take Route 3 east to Ellsworth and on to Mount Desert Island. </li>
+		                 <li> Take I-95 north to Bangor, Maine; from Bangor take Route 1A east to Ellsworth; from Ellsworth take Route 3 to Mount Desert Island. </li>
+		             </ol>
+		          </dd>
+
+		      <dt><dfn>6. What is the tallest mountain in Kobuk Valley National Park?</dfn></dt>
+			      <dd>A. The tallest mountain in the park is Mount Angayukaqsraq (4760 feet high.)</dd>
+
+			  <dt><dfn>7. What camping options are available in the Big Bend National Park?</dfn></dt>
+			      <dd>
+			      	 A. There are three NPS developed campgrounds in the park, the Chisos Basin, Rio Grande Village and Cottonwood campgrounds. Sites in developed campgrounds are offered on a first come, first-served basis (sites fill quickly during peak visitation periods) and are self-pay, self registration. Rio Grande Village and Basin campgrounds have dump stations and water. Camping is not allowed in parking lots or along roadways.
+			      </dd>
+
+			  <dt><dfn>8. How many volcanoes are there on the Big Island?</dfn></dt>
+			      <dd>
+			      	  A. Five volcanoes make up the island of Hawai.
+				   </dd>
+
+			   <dt><dfn>9. Can I backpack in Arches?</dfn></dt>
+			      <dd>
+			      	  A. Yes, although there just a few areas where backpacking is allowed. 
+		          </dd>
+
+		       <dt><dfn>10. What is the acreage of the park?</dfn></dt>
+			      <dd>
+			      	  A. Fort Smith National Historic Site is authorized 75 acres, but the current park size is 37 acres. 
+		          </dd>
+	     </dl>
+ </div>
+
+      <script type="text/javascript">
+              // $ alias to jQuery
+              $('document').ready(function() {
+              	    // adds a class "invisible" to all dd elements
+	                $('dd').addClass('invisible');
+	                // 
+	                $('#toggleBtn').on('click', function(){
+	                	$('dd').toggleClass('invisible');
+	                });
+
+	                $('dt').on('click', function() {
+                    $(this).next().toggleClass('invisible');
+                    // adds a class "clickable" to all dt elements to change the cursor  
+                    $('dt').addClass('clickable');
+               }); 
+
+	              // Panorama viewer for the image  
+	              $(".panorama").panorama_viewer({
+				    repeat: true,
+				    direction: "horizontal", 
+				    animationTime: 700,  
+				    easing: "ease-out",        
+				    overlay: true             
+				  });
+        });
+              
+      </script>
+
+</body>
+</html>

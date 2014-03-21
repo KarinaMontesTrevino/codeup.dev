@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <title>Whack-A-Mario</title>
+      <!--Font Awesome-->
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<!--Google Fonts-->
+	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+	<!--jQuery-->
+	 <script src= "/js/jquery.js"></script>
+	 <style type="text/css">
+        
+		 .gameboard{
+		 	width: 456px;
+		 	margin: 10px auto;
+		 	cursor: url('img/bullet.png'), auto;
+		 }
+
+		  .mariohole{
+		 	float: left;
+			height: 150px;
+			width: 150px;
+		 	border: solid 1px #F00;
+		 }
+        body {
+			text-align: center;
+			font-family: 'Press Start 2P', cursive;
+			background-image: url('img/mario1.jpg');
+		}
+
+		 img{
+		 	width: 150px;
+		 	height: 150px;
+		 	display: none;
+		 }
+
+		 #princess{
+		 	float: right;
+		 }
+
+		 .animated { 
+		    -webkit-animation-duration: 1s; 
+		    animation-duration: 1s; 
+		    -webkit-animation-fill-mode: both; 
+		    animation-fill-mode: both; 
+		    animation-iteration-count:infinite; 
+		    -webkit-animation-iteration-count:infinite; 
+		} 
+
+
+		@-webkit-keyframes bounce { 
+		    0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
+		    40% {-webkit-transform: translateY(-30px);} 
+		    60% {-webkit-transform: translateY(-15px);} 
+		} 
+
+		@keyframes bounce { 
+		    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+		    40% {transform: translateY(-30px);} 
+		    60% {transform: translateY(-15px);} 
+		} 
+
+		.bounce { 
+		    -webkit-animation-name: bounce; 
+		    animation-name: bounce; 
+		}
+
+		@-webkit-keyframes fadeOutLeft { 
+		    0% { 
+		        opacity: 1; 
+		        -webkit-transform: translateX(0); 
+		    } 
+		    100% { 
+		        opacity: 0; 
+		        -webkit-transform: translateX(-20px); 
+		    } 
+		} 
+		@keyframes fadeOutLeft { 
+		    0% { 
+		        opacity: 1; 
+		        transform: translateX(0); 
+		    } 
+		    100% { 
+		        opacity: 0; 
+		        transform: translateX(-20px); 
+		    } 
+		} 
+		.fadeOutLeft { 
+		    -webkit-animation-name: fadeOutLeft; 
+		    animation-name: fadeOutLeft; 
+		}
+
+
+	 </style>
+</head>
+<body>
+	<h1> Whack-A-Mario</h1> 
+	Score:<span id= "score" name= "score">0</span>
+	Time Left:<span id= "timer" name= "timer">0</span>
+	Level:<span id= "level" name= "level">0</span>
+	Higher Score:<span id= "highscore" name= "highscore">0</span>
+	<br><button id ="start" type="submit" style = "background-color: red;">Start</button>
+	<div class = "gameboard">
+
+          <div id= "box1" class = "mariohole">
+          	  <img src = "../img/mario.jpg">
+          </div>
+
+          <div id= "box2" class = "mariohole">
+          	   <img src = "../img/mario.jpg">
+          </div>
+
+          <div id= "box3" class = "mariohole">
+          	     <img src = "../img/mario.jpg">
+          </div>
+
+          <div id= "box4" class = "mariohole">
+          	     <img src = "../img/mario.jpg">
+          </div>
+
+          <div id= "box5" class = "mariohole">
+          	    <img src = "../img/mario.jpg">
+          </div>
+
+          <div id= "box6" class = "mariohole">
+          	  <img src = "../img/mario.jpg">
+          </div>
+
+          <div id= "box7" class = "mariohole">
+          	    <img src = "../img/mario.jpg">
+          </div>
+
+          <div id= "box8" class = "mariohole">
+          	    <img src = "../img/mario.jpg">
+          </div>
+
+          <div id= "box9" class = "mariohole">
+          	   <img src = "../img/mario.jpg">
+          </div>
+
+	</div>
+	<div id="rotating-item-wrapper">
+	    <img class="animated fadeOutLeft" id = "princess" src ="../img/princess.png">
+		<img class="animated bounce" id = "koopa" src ="../img/koopa.png">
+	    <audio id="audiotag1" src="/sounds/smb_kick.wav" preload="auto" autoplay ="false"></audio>
+    </div>
+	<script>
+	
+        var score = 0;
+        var highscore = 0;
+        var timeInterval = 1000;
+        var timer = 15;
+        var moleInterval;
+        var audioElement = document.createElement('audio');
+        	audioElement.setAttribute('src', '../sounds/smb_kick.wav');
+
+        function gameStarts(){
+            
+            reset();
+            alert("Welcome to Whack-A-Mario");
+			moleInterval = setInterval(pickMarioMole, timeInterval);
+			$('button').attr('disabled', 'disabled');
+			$('.gameboard').show();
+			$('#princess').show();
+			$('#koopa').hide();
+
+            
+        }
+
+		function gameStops() {
+         
+          clearInterval(moleInterval);
+          $('button').attr('disabled', false);
+          $('.gameboard').hide();
+          $('#princess').hide();
+	      $('#koopa').show();
+
+		}
+     
+	    var pickMarioMole = function(){
+			// Get all the mario's holes.
+			var holes = $('.mariohole');
+			// Get a random hole
+			var rand = Math.floor(Math.random() * holes.length);
+			console.log(rand);
+			$(holes).children().fadeOut();
+			$(holes[rand]).children().fadeIn();
+
+			timer--;
+
+			if(timer >= 0)
+			{
+				$('#timer').html(timer);
+			}else
+			{   
+				gameStops();
+			}
+
+	    };
+
+        // Game starts when the button start is clicked 
+	    $('button').click(function(){
+
+	         gameStarts();
+	         
+	    });
+
+        // Tracks of the score
+        function scores(){
+        	$('img').click(function(){
+        		$(this).hide();
+        		$('#score').html(score+=1);
+        		 audioElement.play();
+                
+	        	if (score > highscore) 
+	        	{   
+	        	    highscore = score;
+	               $('#highscore').html(highscore);
+	            }else{
+                   $('#highscore').html(highscore);
+	            }
+	       });
+
+       	}
+
+       scores();
+       function reset(){
+          score =0;
+          timer = 15;
+       }
+    </script>
+</body>
+</html>

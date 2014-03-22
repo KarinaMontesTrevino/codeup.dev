@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	  <title> Simon</title>
+	  <meta name="description" content="Game">
+      <meta name="keywords" content="Repeat, Sequence, Game">
+	  <meta name="author" content="Karina Montes-Trevino">
+      <meta charset="UTF-8">
+	  <script src= "/js/jquery.js"></script>
+	  <style>
+		  .container{
+           width: 456px;
+           height: 456px;
+           border: solid #000 5px;
+           margin: 10px auto;
+	     }
+
+          .box{
+          	width: 150px;
+          	height: 150px;
+          	border: solid #000 1px;
+          	float: left;
+          }
+
+          #box1{
+          	background-color: #B00674;  
+          }
+
+          #box2{
+          	background-color: #FF6600;  
+ 
+          }
+
+          #box3{
+          	background-color: #21B6A8; 
+          } 
+
+          #box4{
+          	background-color: #FFD800; 
+          }  
+  		  
+  		  #box5{
+          	background-color: #FF0000; 
+          }  
+
+          #box6{
+          	background-color: #003366;
+          }
+
+          #box7{
+          	background-color: #41924B;
+          }
+
+          #box8{
+          	background-color: #66CCFF;
+          }
+
+          #box9{
+          	background-color: #FF0080;
+          }
+
+          body{
+          	text-align: center;
+          }
+        
+      </style>
+<head>
+<body>
+	  <div class= "container">
+	  	  <div id = "box1" class = "box"></div>
+	  	  <div id = "box2" class = "box"></div>
+	  	  <div id = "box3" class = "box"></div>
+	  	  <div id = "box4" class = "box"></div>
+	  	  <div id = "box5" class = "box"></div>
+	  	  <div id = "box6" class = "box"></div>
+	  	  <div id = "box7" class = "box"></div>
+	  	  <div id = "box8" class = "box"></div>
+	  	  <div id = "box9" class = "box"></div>
+	  </div>
+      Watch the sequence<span id = "sequence"</span>
+	  <script>
+
+      $('document').ready(function(){});
+
+        var boxes = $('.box')
+        var randomBox = Math.floor(Math.random() * boxes.length);
+            console.log(randomBox);
+            $(boxes).fadeIn();
+	      	$(boxes[randomBox]).fadeOut();
+
+
+	  </script>
+</body>
+</htmml>

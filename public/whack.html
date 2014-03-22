@@ -65,29 +65,19 @@
 		    animation-name: bounce; 
 		}
 
-		@-webkit-keyframes fadeOutLeft { 
-		    0% { 
-		        opacity: 1; 
-		        -webkit-transform: translateX(0); 
-		    } 
-		    100% { 
-		        opacity: 0; 
-		        -webkit-transform: translateX(-20px); 
-		    } 
+		@-webkit-keyframes pulse { 
+		    0% { -webkit-transform: scale(1); } 
+		    50% { -webkit-transform: scale(1.1); } 
+		    100% { -webkit-transform: scale(1); } 
 		} 
-		@keyframes fadeOutLeft { 
-		    0% { 
-		        opacity: 1; 
-		        transform: translateX(0); 
-		    } 
-		    100% { 
-		        opacity: 0; 
-		        transform: translateX(-20px); 
-		    } 
+		@keyframes pulse { 
+		    0% { transform: scale(1); } 
+		    50% { transform: scale(1.1); } 
+		    100% { transform: scale(1); } 
 		} 
-		.fadeOutLeft { 
-		    -webkit-animation-name: fadeOutLeft; 
-		    animation-name: fadeOutLeft; 
+		.pulse { 
+		    -webkit-animation-name: pulse; 
+		    animation-name: pulse; 
 		}
 
 
@@ -140,9 +130,10 @@
 
 	</div>
 	<div id="rotating-item-wrapper">
-	    <img class="animated fadeOutLeft" id = "princess" src ="../img/princess.png">
+		<img id="dialog" src="../img/wigflip-ds.png">
+	    <img class="animated pulse" id = "princess" src ="../img/princess.png">
 		<img class="animated bounce" id = "koopa" src ="../img/koopa.png">
-	    <audio id="audiotag1" src="/sounds/smb_kick.wav" preload="auto" autoplay ="false"></audio>
+	    <audio id="audiotag1" src="/sounds/game_enter.wav" preload="auto" autoplay ="false"></audio>
     </div>
 	<script>
 	
@@ -153,14 +144,17 @@
         var moleInterval;
         var audioElement = document.createElement('audio');
         	audioElement.setAttribute('src', '../sounds/smb_kick.wav');
+        var audioElement1 = document.createElement('audio');
+        	audioElement1.setAttribute('src', '../sounds/game_over.wav');
 
         function gameStarts(){
             
             reset();
-            alert("Welcome to Whack-A-Mario");
+            // alert("Welcome to Whack-A-Mario");
 			moleInterval = setInterval(pickMarioMole, timeInterval);
 			$('button').attr('disabled', 'disabled');
 			$('.gameboard').show();
+            // $('#dialog').show();
 			$('#princess').show();
 			$('#koopa').hide();
 
@@ -174,6 +168,7 @@
           $('.gameboard').hide();
           $('#princess').hide();
 	      $('#koopa').show();
+	      audioElement1.play();
 
 		}
      
@@ -205,7 +200,7 @@
 	         
 	    });
 
-        // Tracks of the score
+        // Tracks the score and the highscore with every click
         function scores(){
         	$('img').click(function(){
         		$(this).hide();
@@ -224,6 +219,8 @@
        	}
 
        scores();
+
+       // Resets some of the variable each time a game starts
        function reset(){
           score =0;
           timer = 15;

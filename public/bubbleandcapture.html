@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+     <head>
+     <title></title>
+     </head>
+<body>
+       <div  id= "outside">
+       	Outside
+       	 <div id="inside">
+          Inside
+       	 </div>
+       </div>
+       <script type="text/javascript">
+
+            var outside = document.getElementById('outside');
+            var inside = document.getElementById('inside');
+
+            outside.addEventListener ('click', function(e) {
+            	alert('outside');
+            }, false);
+
+            inside.addEventListener('click', function(e){
+            	//e.stopPropagation(); //stop bubbling
+                alert('inside');
+            }, false);
+       </script>
+</body>
+</html>
